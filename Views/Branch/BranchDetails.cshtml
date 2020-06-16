@@ -1,0 +1,45 @@
+﻿@model BranchViewModel
+@{
+    ViewData["Title"] = "BranchDetails";
+}
+<div class="text-center">
+    <h2>These are the employees for this branch: <b>@Model.BranchName</b></h2>
+</div>
+<hr />
+
+@if (Model.Employees.Count() == 0)
+{
+    <h2 class="alert-info">
+        There are no employees for this branch.
+    </h2>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <th>Full Name</th>
+        <th>Nick Name</th>
+        <th>Email Address</th>
+        <th>Age</th>
+        <th>Birthday</th>
+        <th>Role</th>
+        <th>Name of Branch</th>
+        </thead>
+        <tbody>
+            @foreach (Employee employee in Model.Employees)
+        {
+                <tr>
+                    <td>@employee.FullName</td>
+                    <td>@employee.NickName</td>
+                    <td>@employee.EmailAddress</td>
+                    <td>@employee.Age</td>
+                    <td>@employee.Birthday.ToString("yyyy-MM-dd")</td>
+                    <td>@employee.Role</td>
+                    <td>@employee.Branch.Location</td>
+                </tr>
+
+        }
+
+        </tbody>
+    </table>
+            }

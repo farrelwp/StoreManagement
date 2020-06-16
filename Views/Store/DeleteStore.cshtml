@@ -1,0 +1,14 @@
+﻿@model StoreViewModel
+@{
+    ViewData["Title"] = "DeleteStore";
+}
+
+<div class="text-center">
+    <h2 class="text-danger">You are about to delete the Store: @Model.StoreName</h2>
+    <h3>Are you sure?</h3>
+</div>
+
+@Html.ActionLink("Cancel","All","Store")
+@Html.ActionLink("Yes, sure!","StoreDeleted","Store",new {@id = Model.Id })
+
+

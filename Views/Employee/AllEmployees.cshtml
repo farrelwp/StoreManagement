@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<Employee>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "AllEmployees";
+}
+
+<h2>@ViewData["EmployeeMessage"]</h2>
+
+@Html.ActionLink("Create Employee", "CreateEmployee", "Employee")
+
+
+
+
+
+@if (Model.Count() == 0)
+{
+    <div class="text-center alert-info">
+        <h1>
+            There are no employees available.
+        </h1>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <th>Full Name</th>
+        <th>Nick Name</th>
+        <th>Email Address</th>
+        <th>Age</th>
+        <th>Birthday</th>
+        <th>Role</th>
+        <th>Name of Branch</th>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <th>Edit</th>
+            <th>Delete</th>
+        }
+        </thead>
+        <tbody>
+            @foreach (Employee employee in Model)
+            {
+                <tr>
+                    <td>@employee.FullName</td>
+                    <td>@employee.NickName</td>
+                    <td>@employee.EmailAddress</td>
+                    <td>@employee.Age</td>
+                    <td>@employee.Birthday.ToString("yyyy-MM-dd")</td>
+                    <td>@employee.Role</td>
+                    <td>@employee.Branch.Location</td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <td>@Html.ActionLink("Edit Employee", "EditEmployee", "Employee", new { @id = employee.Id })</td>
+                        <td>@Html.ActionLink("Delete Employee", "DeleteEmployee", "Employee", new { @id = employee.Id })</td>
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

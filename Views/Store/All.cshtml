@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<Store>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h2>All Stores are Shown Here</h2>
+
+@Html.ActionLink("Create new Store", "CreateStore", "Store")
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-hover">
+        <thead>
+        <th>Store Name</th>
+        <th>Store Address</th>
+        <th>Founding Year</th>
+        <th>Number of Employees</th>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Details</th>
+
+        }
+
+        </thead>
+        <tbody>
+            @foreach (Store store in Model)
+            {
+                <tr>
+                    <td>@store.Name</td>
+                    <td>@store.Address</td>
+                    <td>@store.FoundingYear.ToString("yyyy-MM-dd")</td>
+                    <td>@store.NumberOfEmployees</td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <td>@Html.ActionLink("Edit", "EditStore", "Store", new { @id = store.Id })</td>
+                        <td>@Html.ActionLink("Delete", "DeleteStore", "Store", new { @id = store.Id })</td>
+                        <td>@Html.ActionLink("Details", "StoreDetails", "Store", new { @id = store.Id })</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="text-center alert-info">
+        <h1>There are no stores available.</h1>
+    </div>
+}

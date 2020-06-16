@@ -1,0 +1,39 @@
+﻿@model StoreViewModel
+@{
+    ViewData["Title"] = "StoreDetails";
+}
+<div class="text-center">
+    <h2>These are the branches that work at store: <b>@Model.StoreName</b></h2>
+</div>
+<hr />
+
+@if (Model.Branches.Count() == 0)
+{
+    <h2 class="alert-info">
+        There are no branches for this store.
+    </h2>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+        <th>Full Name</th>
+        <th>Name of Store</th>
+        <th>Age</th>
+        <th>Years Of Experience</th>
+        <th>Phone Number</th>
+        </thead>
+        <tbody>
+            @foreach (Branch dfk in Model.Branches)
+                {
+                <tr>
+                    <td>@dfk.Location</td>
+                    <td>@dfk.Store.Name</td>
+                    <td>@dfk.OwnerAge</td>
+                    <td>@dfk.YearsOfOperation</td>
+                    <td>@dfk.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

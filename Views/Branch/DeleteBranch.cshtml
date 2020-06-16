@@ -1,0 +1,10 @@
+﻿@model BranchViewModel
+
+
+<div class="text-center">
+    <h2 class="text-danger">You are about to delete the Branch: @Model.Location</h2>
+    <h3>Are you sure?</h3>
+</div>
+@Html.ActionLink("Cancel", "AllBranches", "Branch", null, new { @class = "btn btn-default" })
+@Html.ActionLink("Yes, sure!", "BranchDeleted", "Branch", new { @id = Model.Id }, new { @class="btn btn-danger" })
+

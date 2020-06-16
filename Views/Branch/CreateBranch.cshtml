@@ -1,0 +1,46 @@
+﻿@model Branch
+@{
+    ViewData["Title"] = "CreateBranch";
+}
+
+<h2>Create New Branch</h2>
+
+@Html.ActionLink("Show All Branches", "AllBranches", "Branch")
+
+@using (Html.BeginForm("BranchCreated", "Branch", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(n => n.StoreId)
+        @Html.DropDownListFor(n => n.StoreId, new SelectList(ViewBag.Stores, "Id","Name"), "Select a store", new { @class = "form-control"})
+        @Html.ValidationMessageFor(n => n.StoreId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(n => n.Location)
+        @Html.TextBoxFor(n => n.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(n => n.Location, "", new { @class = "text-danger"} )
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(n => n.OwnerAge)
+        @Html.TextBoxFor(e => e.OwnerAge, new { @class = "form-control" })
+        @Html.ValidationMessageFor(n => n.OwnerAge, "", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(n => n.YearsOfOperation)
+        @Html.TextBoxFor(a => a.YearsOfOperation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(n => n.YearsOfOperation, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(n => n.PhoneNumber)
+        @Html.TextBoxFor(a => a.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(n => n.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+
+    
+
+    <button type="submit" class="btn btn-success">Create Branch</button>
+}
+
